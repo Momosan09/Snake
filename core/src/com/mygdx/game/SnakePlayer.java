@@ -18,12 +18,14 @@ public class SnakePlayer {
 	//public Rectangle body;
 	//public ShapeRenderer bodyColor;
 	public float speed = 100;
+	public float scale = 1;
 	public Sprite sprite;
 
 	
 	public SnakePlayer(Texture img){
 		sprite = new Sprite(img);	
-		position = new Vector2((Gdx.graphics.getWidth()/2) - sprite.getWidth()/2, ((Gdx.graphics.getHeight()/2)) - sprite.getHeight()/2);
+		//sprite.scale(scale);
+		position = new Vector2((Gdx.graphics.getWidth()/2)-(sprite.getWidth()/2), (Gdx.graphics.getHeight()/2)-(sprite.getHeight()/2));
 	}
 	
 	public void draw(SpriteBatch batch) {
@@ -52,10 +54,16 @@ public class SnakePlayer {
 	}
 	
 	public void checkOutOfLimits() {
-		if(sprite.getX()+sprite.getWidth() >= Gdx.graphics.getWidth())alive = false;
-		if(sprite.getX() < 0) alive = false;
-		if(sprite.getY()+sprite.getHeight() >= Gdx.graphics.getHeight())alive = false;
-		if(sprite.getY()<= 0) alive = false;
+		//if(((sprite.getX()-(sprite.getWidth()*scale)) <= 0 - (sprite.getWidth()*scale)/2)) alive = false;//izquierda
+		//if(sprite.getX()+(sprite.getWidth()*scale)>= Gdx.graphics.getWidth())alive = false;//derecha
+		//if(((sprite.getY()*scale) <= 0)) alive = false;//arriba
+		//if(sprite.getY()+(sprite.getHeight()*scale) >= Gdx.graphics.getHeight())alive = false;//abajo
+		
+		if(sprite.getX() <= 0)alive=false;//izquierda
+		if((sprite.getX()+sprite.getHeight()) >= Gdx.graphics.getWidth())alive=false;//derecha
+		if(sprite.getY() <= 0)alive=false;//arriba
+		if((sprite.getY()+sprite.getHeight()) >= Gdx.graphics.getHeight())alive=false;//abajo
+
 	}
 	
 	
